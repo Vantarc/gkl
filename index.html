@@ -8,12 +8,12 @@
 				margin: 0;
 			}
 
-			html {
+			html, body {
 				height: 100%;
 				margin: 0;
 			}
 
-			body {
+			#main {
 				display: flex;
 				flex-wrap: wrap;
 				flex-direction: row;
@@ -71,46 +71,48 @@
 		</style>
 	</head>
 	<body>
+		<div id="main">
+			<div class="header" id="cart-header">
+				<a href="#" onclick="listDir('/')">GKL - Gatrobe Knowledge Library</a>
+				<span v-if="currentResource === null" >Please choose a PDF.</span>
+				<template v-if="currentResource !== null">
+					<span>{{ currentResource }}</span>
+					<a v-if="!currentAdded" @click="addToCart" href="#">Add to Cart</a>
+					<a v-if="currentAdded" @click="removeFromCart" href="#">Remove from Cart</a>
+				</template>
+				<a href="#">Next Step</a>
 
-		<div class="header" id="cart-header">
-			<a href="#" onclick="listDir('/')">GKL - Gatrobe Knowledge Library</a>
-			<span v-if="currentResource === null" >Please choose a PDF.</span>
-			<template v-if="currentResource !== null">
-				<span>{{ currentResource }}</span>
-				<a v-if="!currentAdded" @click="addToCart" href="#">Add to Cart</a>
-				<a v-if="currentAdded" @click="removeFromCart" href="#">Remove from Cart</a>
-			</template>
-			<a href="#">Next Step</a>
-
-			<a @click="toggleCart" class="right" id="cart-btn" href="#">Cart ({{ count }})</a>
-			<div id="cart" v-bind:style="{ display: cartVisible ? 'block' : 'none' }">
-				<div v-for="item in cart">
-					<h2>{{ item.course }}</h2>
-					<ul>
-						<li v-for="res in item.resources">{{res}}</li>
-					</ul>
+				<a @click="toggleCart" class="right" id="cart-btn" href="#">Cart ({{ count }})</a>
+				<div id="cart" v-bind:style="{ display: cartVisible ? 'block' : 'none' }">
+					<div v-for="item in cart">
+						<h2>{{ item.course }}</h2>
+						<ul>
+							<li v-for="res in item.resources">{{res}}</li>
+						</ul>
+					</div>
 				</div>
 			</div>
+
+			<template v-if="step === 1">
+
+				<file-list v-on:show="showResource"></file-list>
+
+				<iframe id="viewer-frame" src="../pdfjs/web/viewer.html?file=" ></iframe>
+
+			</template>
+
+			<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+			<script src="credentials.js" charset="utf-8"></script>
+
+			<script src="filelist.js" charset="utf-8"></script>
+			<script src="minidav2.js" charset="utf-8"></script>
+			<script src="cart.js" charset="utf-8"></script>
+			<script src="main.js" charset="utf-8"></script>
+
+			<script type="text/javascript">
+				Vue.config.devtools = true
+			</script>
 		</div>
-
-		<ul id="file-list">
-			<li><a @click="up()">..</a></li>
-			<li v-for="item in items">
-				<a v-if="item.type == 'dir'" @click="browse(item.resource)">{{ item.name }}</a>
-				<a v-if="item.type == 'file'" @click="show(item.resource)">{{ item.name }}</a>
-			</li>
-		</ul>
-
-		<iframe id="viewer-frame" src="../pdfjs/web/viewer.html?file=" ></iframe>
-
-		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
-		<script src="credentials.js" charset="utf-8"></script>
-		<script src="minidav2.js" charset="utf-8"></script>
-		<script src="cart.js" charset="utf-8"></script>
-
-		<script type="text/javascript">
-			Vue.config.devtools = true
-		</script>
 	</body>
 </html>
