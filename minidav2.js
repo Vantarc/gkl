@@ -29,7 +29,7 @@ function filenameFromPath(dir) {
 
 
 function showResource(dir) {
-	cart.currentResource = dir;
+	main.currentResource = dir;
 	req(dir, 'GET', (x) => x.arrayBuffer()).then(data => {
 		var frame = document.getElementById("viewer-frame");
 		frame.contentWindow.PDFViewerApplication.open(data);
