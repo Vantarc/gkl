@@ -94,9 +94,9 @@
 	<body>
 		<div id="main">
 			<div class="header" id="cart-header">
-				<a href="#" @click="$refs.fileList.listDir('/')">GKL - Gatrobe Knowledge Library</a>
+				<a href="#" @click="home">GKL - Gatrobe Knowledge Library</a>
 
-				<cart-actions v-bind:current-resource="currentResource"></cart-actions>
+				<cart-actions v-if="step == 1" v-bind:current-resource="currentResource"></cart-actions>
 				<a href="#" v-if="step > 1" @click="step = step - 1">Prev Step</a>
 				<a href="#" v-if="step < 3" @click="step = step + 1">Next Step</a>
 

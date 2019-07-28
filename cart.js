@@ -48,6 +48,9 @@ var cart = {
 		if (Object.keys(this.courses[course].resources).length < 1)
 			Vue.delete(this.courses, course);
 	},
+	clearCart() {
+		this.courses = {};
+	},
 	getResource(resource) {
 		var s = resource.split('/');
 		var course = s[0] == '' ? s[1] : s[0];

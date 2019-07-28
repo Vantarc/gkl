@@ -6,5 +6,22 @@ main = new Vue({
 	data: {
 		step: 1,
 		currentResource: null
+	},
+	methods: {
+		home() {
+			if (Object.keys(cart.courses).length > 0) {
+				if (!confirm('Are you sure, that you want to clear your cart?')) {
+					return 0;
+				}
+			}
+
+			cart.clearCart();
+			this.currentResource = null;
+			if (this.step !== 1) {
+				this.step = 1;
+			} else {
+				this.$refs.fileList.listDir('/');
+			}
+		}
 	}
 })
