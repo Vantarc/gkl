@@ -15,15 +15,19 @@ var cart = {
 			// this.courses[course] = { ... };
 			Vue.set(this.courses, course, {
 				course: course,
-				resources: [],
+				resources: {},
 				cartList: null
 			});
 		}
 
 		var resource = s.join('/');
 
-		if (this.courses[course].resources.indexOf(resource) == -1) {
-			this.courses[course].resources.push(resource);
+		if (this.courses[course].resources[resource] === undefined) {
+			Vue.set(this.courses[course].resources, resource, {
+				resource: resource,
+				cache: null,
+				removedPages: []
+			});
 		}
 	},
 	removeFromCart(resource) {
@@ -34,11 +38,35 @@ var cart = {
 		var course = s[0] == '' ? s[1] : s[0];
 		var resource = s.join('/');
 
-		var idx = this.courses[course].resources.indexOf(resource);
-		this.courses[course].resources.splice(idx, 1);
+		if (this.courses[course] === undefined)
+			return;
 
-		if (this.courses[course].resources.length < 1)
+		Vue.delete(this.courses[course].resources, resource);
+
+		if (Object.keys(this.courses[course].resources).length < 1)
 			Vue.delete(this.courses, course);
+	},
+	getResource(resource) {
+		var s = resource.split('/');
+		var course = s[0] == '' ? s[1] : s[0];
+		var resource = s.join('/');
+
+		console.assert(this.courses[course] !== undefined);
+		console.assert(this.courses[course].resources[resource] !== undefined);
+
+		return this.courses[course].resources[resource];
+	},
+	getResourceDataCached(resource) {
+		var res = this.getResource(resource);
+
+		if (res.cache === null) {
+			return req(resource, 'GET', (x) => x.arrayBuffer()).then(data => {
+				res.cache = data;
+				return data;
+			})
+		} else {
+			return Promise.resolve(res.cache);
+		}
 	}
 };
 
@@ -73,9 +101,9 @@ Vue.component('cart-actions', {
 	computed: {
 		currentAdded() {
 			for (var course of Object.values(this.cart.courses)) {
-				for (var res of course.resources) {
+				for (var res of Object.values(course.resources)) {
 					// check whether current item is in cart
-					if (this.currentResource === res)
+					if (this.currentResource === res.resource)
 						return true;
 				}
 			}
@@ -98,7 +126,7 @@ Vue.component('cart-list', {
 				<div v-for="course in cart.courses">
 					<h2>{{ course.course }}</h2>
 					<ul>
-						<li v-for="res in course.resources">{{res}}</li>
+						<li v-for="res in course.resources">{{res.resource}}</li>
 					</ul>
 				</div>
 			</div>
@@ -113,7 +141,7 @@ Vue.component('cart-list', {
 		count() {
 			var count = 0;
 			for (var course of Object.values(this.cart.courses)) {
-				for (var res of course.resources) {
+				for (var res of Object.values(course.resources)) {
 					count += 1;
 				}
 			}

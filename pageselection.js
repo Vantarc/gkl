@@ -2,10 +2,11 @@
 Vue.component('preview-page', {
 	data: function () {
 		return {
-			checked: false
+			checked: false,
+			cart: cart
 		};
 	},
-	props: ['page'],
+	props: ['page', 'resource', 'pageIdx'],
 	template: `
 		<span class="preview-page" @click="toggle">
 			<canvas ref="canvas"></canvas><br>
@@ -38,6 +39,21 @@ Vue.component('preview-page', {
 		toggle() {
 			this.checked = !this.checked;
 		}
+	},
+	watch: {
+		checked(val) {
+			const res = this.cart.getResource(this.resource);
+			const idx = Number(this.pageIdx);
+
+			if (val) {
+				console.assert(res.removedPages.indexOf(idx) === -1);
+				res.removedPages.push(idx);
+			} else {
+				const position = res.removedPages.indexOf(idx);
+				console.assert(position !== -1);
+				Vue.delete(res.removedPages, position);
+			}
+		}
 	}
 });
 
@@ -45,20 +61,21 @@ Vue.component('preview-page', {
 Vue.component('preview-resource', {
 	data: function () {
 		return {
-			pages: {}
+			pages: {},
+			cart: cart
 		};
 	},
 	props: ['resource'],
 	template: `
 		<div class="preview-resource">
-			<preview-page v-if="page !== null" v-for="(page, idx) in pages" :page="page"></preview-page>
+			<preview-page v-if="page !== null" v-for="(page, idx) in pages" :page="page" :resource="resource" :page-idx="idx"></preview-page>
 		</div>
 	`,
 	mounted: function () {
 		var dir = this.resource;
 		var self = this;
 
-		req(dir, 'GET', (x) => x.arrayBuffer()).then(data => {
+		this.cart.getResourceDataCached(dir).then(data => {
 
 			var loadingTask = pdfjsLib.getDocument(data);
 			loadingTask.promise.then(function(pdf) {
@@ -90,9 +107,9 @@ Vue.component('preview-cart', {
 			</div>
 			<div v-for="course in cart.courses">
 				<h2>{{ course.course }}</h2>
-				<div v-for="resource of course.resources">
-					<h3>{{ resource }}</h3>
-					<preview-resource :resource="resource"/>
+				<div v-for="resource in course.resources">
+					<h3>{{ resource.resource }}</h3>
+					<preview-resource :resource="resource.resource"/>
 				</div>
 			</div>
 		</div>
