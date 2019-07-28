@@ -76,7 +76,7 @@
 				<a href="#" @click="$refs.fileList.listDir('/')">GKL - Gatrobe Knowledge Library</a>
 
 				<cart-actions v-bind:current-resource="currentResource"></cart-actions>
-				<a href="#">Next Step</a>
+				<a href="#" @click="step = 2">Next Step</a>
 
 				<cart-list></cart-list>
 			</div>
@@ -88,10 +88,15 @@
 				<iframe id="viewer-frame" src="../pdfjs/web/viewer.html?file=" ></iframe>
 
 			</template>
+			<template v-if="step === 2">
+				<preview-resource resource="/Ausgleichsvorgänge in Elektroenergiesystemen (Netze 2)/Uebungen/_EN_2_22.pdf"/>
+			</template>
 			<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+			<script src="../pdfjs/build/pdf.js"></script>
 
 			<script src="credentials.js" charset="utf-8"></script>
 
+			<script src="pageselection.js" charset="utf-8"></script>
 			<script src="filelist.js" charset="utf-8"></script>
 			<script src="minidav2.js" charset="utf-8"></script>
 			<script src="cart.js" charset="utf-8"></script>
