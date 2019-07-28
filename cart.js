@@ -1,4 +1,6 @@
 
+var PDFDocument = PDFLib.PDFDocument;
+
 // state pattern: https://vuejs.org/v2/guide/state-management.html#Simple-State-Management-from-Scratch
 var cart = {
 	courses: {},
@@ -67,6 +69,36 @@ var cart = {
 		} else {
 			return Promise.resolve(res.cache);
 		}
+	},
+	async mergedPDF() {
+		const pdfDoc = await PDFDocument.create();
+
+		for (var course of Object.values(this.courses)) {
+			for (var res of Object.values(course.resources)) {
+				await this._addToPDF(pdfDoc, res.resource);
+			}
+		}
+
+		return await pdfDoc.save();
+	},
+	async _addToPDF(destDoc, resource) {
+		const srcBytes = await this.getResourceDataCached(resource);
+		const srcDoc = await PDFDocument.load(srcBytes);
+		const srcPageCount = srcDoc.getPages().length;
+		const res = this.getResource(resource);
+
+		var pageIndices = [];
+		for (var i = 0; i < srcPageCount; i++) {
+			if (res.removedPages.indexOf(i) !== -1)
+				continue;
+
+			pageIndices.push(i);
+		}
+
+		const newPages = await destDoc.copyPages(srcDoc, pageIndices);
+
+		for (const page of newPages)
+			destDoc.addPage(page)
 	}
 };
 
@@ -146,6 +178,52 @@ Vue.component('cart-list', {
 				}
 			}
 			return count;
+		}
+	}
+});
+
+Vue.component('cart-summary', {
+	data: function () {
+		return {
+			cart: cart
+		}
+	},
+	template: `
+		<div class="cart-summary">
+			<div>
+				<div v-for="course in cart.courses">
+					<h2>{{ course.course }}</h2>
+					<ul>
+						<li v-for="res in course.resources">{{res.resource}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	`,
+});
+
+Vue.component('cart-merged-view', {
+	data: function () {
+		return {
+			cart: cart
+		}
+	},
+	template: `
+		<iframe @load="pdf" id="viewer-final" src="../pdfjs/web/viewer.html?file=" ></iframe>
+	`,
+	methods: {
+		async pdf() {
+			var data = await cart.mergedPDF();
+			var frame = this.$el;
+			frame.contentWindow.PDFViewerApplication.open(data);
+		}
+	},
+	watch: {
+		cart: {
+			handler() {
+				this.pdf();
+			},
+			deep: true
 		}
 	}
 });

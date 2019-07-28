@@ -1,8 +1,13 @@
 
 Vue.component('preview-page', {
 	data: function () {
+		const res = cart.getResource(this.resource);
+		const idx = Number(this.pageIdx);
+
+		const checked = res.removedPages.indexOf(idx) !== -1;
+
 		return {
-			checked: false,
+			checked: checked,
 			cart: cart
 		};
 	},
@@ -14,7 +19,7 @@ Vue.component('preview-page', {
 			<label>Don't print this page.</label>
 		</span>
 	`,
-	mounted: function () {
+	mounted() {
 		var canvas = this.$refs.canvas;
 		x = this;
 		var page = this.page();
