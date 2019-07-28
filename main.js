@@ -1,4 +1,6 @@
 
+var debug = true;
+
 main = new Vue({
 	el: "#main",
 	data: {

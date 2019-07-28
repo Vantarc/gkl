@@ -45,13 +45,15 @@ var cart = {
 Vue.component('cart-actions', {
 	data: function () {
 		return {
-			cart: cart
+			cart: cart,
+			debug: debug
 		}
 	},
 	props: ['currentResource'],
 	template: `
 		<span class="sub">
 			<span v-if="currentResource === null">Please choose a PDF.</span>
+			<a v-if="debug" @click="debugCart" href="#">Select DebugCart</a>
 			<template v-if="currentResource !== null">
 				<span>{{ currentResource }}</span>
 				<a v-if="!currentAdded" @click="addToCart" href="#">Add to Cart</a>
@@ -61,6 +63,11 @@ Vue.component('cart-actions', {
 	`,
 	methods: {
 		addToCart() { this.cart.addToCart(this.currentResource) },
+		debugCart() {
+			this.cart.addToCart('/3D_Audio/Kurzklausuren/SS2018_1.pdf');
+			this.cart.addToCart('/Ausbreitung elektromagnetischer Wellen/Skript/2009/Wellenausbreitung_V_OK_WS09-10_Kap1.pdf');
+			this.cart.addToCart('/Ausbreitung elektromagnetischer Wellen/Skript/2009/Wellenausbreitung_V_OK_WS09-10_Kap2.pdf');
+		},
 		removeFromCart() { this.cart.removeFromCart(this.currentResource) }
 	},
 	computed: {
