@@ -63,3 +63,27 @@ Vue.component('preview-resource', {
 		});
 	}
 });
+
+Vue.component('preview-cart', {
+	data: function () {
+		return {
+			cart: cart
+		};
+	},
+	template: `
+		<template>
+			<div>
+				<div v-if="Object.keys(cart.courses).length < 1">
+					<h2>ERROR: Cart is empty</h2>
+				</div>
+				<div v-for="course in cart.courses">
+					<h2>{{ course.course }}</h2>
+					<div v-for="resource of course.resources">
+						<h3>{{ resource }}</h3>
+						<preview-resource :resource="resource"/>
+					</div>
+				</div>
+			</dif>
+		</template>
+	`,
+});
