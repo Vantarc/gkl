@@ -1,11 +1,21 @@
 
 Vue.component('preview-page', {
+	data: function () {
+		return {
+			checked: false
+		};
+	},
 	props: ['page'],
 	template: `
-		<canvas></canvas>
+		<span class="preview-page" @click="toggle">
+			<canvas ref="canvas"></canvas><br>
+			<input type="checkbox" v-model="checked">
+			<label>Don't print this page.</label>
+		</span>
 	`,
 	mounted: function () {
-		var canvas = this.$el;
+		var canvas = this.$refs.canvas;
+		x = this;
 		var page = this.page();
 
 		var scale = 0.3;
@@ -23,6 +33,11 @@ Vue.component('preview-page', {
 		};
 
 		page.render(renderContext);
+	},
+	methods: {
+		toggle() {
+			this.checked = !this.checked;
+		}
 	}
 });
 
@@ -35,11 +50,9 @@ Vue.component('preview-resource', {
 	},
 	props: ['resource'],
 	template: `
-		<template>
-		 	<div>
-				<preview-page v-if="page !== null" v-for="(page, idx) in pages" :page="page"></preview-page>
-			</dif>
-		</template>
+		<div class="preview-resource">
+			<preview-page v-if="page !== null" v-for="(page, idx) in pages" :page="page"></preview-page>
+		</div>
 	`,
 	mounted: function () {
 		var dir = this.resource;
@@ -71,19 +84,17 @@ Vue.component('preview-cart', {
 		};
 	},
 	template: `
-		<template>
-			<div>
-				<div v-if="Object.keys(cart.courses).length < 1">
-					<h2>ERROR: Cart is empty</h2>
+		<div class="preview-cart">
+			<div v-if="Object.keys(cart.courses).length < 1">
+				<h2>ERROR: Cart is empty</h2>
+			</div>
+			<div v-for="course in cart.courses">
+				<h2>{{ course.course }}</h2>
+				<div v-for="resource of course.resources">
+					<h3>{{ resource }}</h3>
+					<preview-resource :resource="resource"/>
 				</div>
-				<div v-for="course in cart.courses">
-					<h2>{{ course.course }}</h2>
-					<div v-for="resource of course.resources">
-						<h3>{{ resource }}</h3>
-						<preview-resource :resource="resource"/>
-					</div>
-				</div>
-			</dif>
-		</template>
+			</div>
+		</div>
 	`,
 });
