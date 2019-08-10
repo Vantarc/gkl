@@ -1,6 +1,7 @@
-var debug = true;
+Vue.use(VueMaterial);
+const debug = true;
 
-main = new Vue({
+const main = new Vue({
     el: "#main",
     data: {
         step: 1,
