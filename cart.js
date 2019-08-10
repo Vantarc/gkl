@@ -212,9 +212,13 @@ Vue.component('cart-merged-view', {
 		}
 	},
 	template: `
-		<iframe @load="pdf" id="viewer-final" src="../pdfjs/web/viewer.html?file=" ></iframe>
+		<iframe @load="load" id="viewer-final" src="../pdfjs/web/viewer.html?file=" ></iframe>
 	`,
 	methods: {
+		async load() {
+			modifyPDFJS(this.$el);
+			await this.pdf();
+		},
 		async pdf() {
 			var data = await cart.mergedPDF();
 			var frame = this.$el;
