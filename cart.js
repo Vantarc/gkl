@@ -212,7 +212,7 @@ Vue.component('cart-merged-view', {
 		}
 	},
 	template: `
-		<iframe @load="load" id="viewer-final" src="../pdfjs/web/viewer.html?file=" ></iframe>
+		<iframe @load="load" id="viewer-final" src="node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
 	`,
 	methods: {
 		async load() {

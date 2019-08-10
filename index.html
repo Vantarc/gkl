@@ -21,7 +21,7 @@
 
 				<file-list ref="fileList" v-on:show="showResource"></file-list>
 
-				<iframe id="viewer-frame" src="../pdfjs/web/viewer.html?file=" ></iframe>
+				<iframe onload="modifyPDFJS(this)" id="viewer-frame" src="node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
 
 			</template>
 			<template v-if="step === 2">
@@ -34,21 +34,24 @@
 				<cart-merged-view></cart-merged-view>
 
 			</template>
-			<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-			<script src="../pdfjs/build/pdf.js"></script>
-			<script src="../pdflib_test/node_modules/pdf-lib/dist/pdf-lib.js" charset="utf-8"></script>
-
-			<script src="credentials.js" charset="utf-8"></script>
-
-			<script src="pageselection.js" charset="utf-8"></script>
-			<script src="filelist.js" charset="utf-8"></script>
-			<script src="minidav2.js" charset="utf-8"></script>
-			<script src="cart.js" charset="utf-8"></script>
-			<script src="main.js" charset="utf-8"></script>
-
-			<script type="text/javascript">
-				Vue.config.devtools = true
-			</script>
 		</div>
+
+		// Node modules
+		<script src="node_modules/vue/dist/vue.js"></script>
+		<script src="node_modules/pdfjs-dist-viewer-min/build/minified/build/pdf.js"></script>
+		<script src="node_modules/pdf-lib/dist/pdf-lib.js" charset="utf-8"></script>
+
+
+		<script src="credentials.js" charset="utf-8"></script>
+		<script src="modify_pdfjs.js" charset="utf-8"></script>
+		<script src="pageselection.js" charset="utf-8"></script>
+		<script src="filelist.js" charset="utf-8"></script>
+		<script src="minidav2.js" charset="utf-8"></script>
+		<script src="cart.js" charset="utf-8"></script>
+		<script src="main.js" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			Vue.config.devtools = true
+		</script>
 	</body>
 </html>
