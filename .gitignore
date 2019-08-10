@@ -1,1 +1,3 @@
 credentials.js
+.idea/**
+**/node_modules/**
