@@ -23,3 +23,20 @@ iframe {
     margin: 0;
     height: calc(100vh - 220px) !important;
 }
+
+
+.preview-resource {
+    clear: both;
+    overflow: hidden;
+}
+
+.preview-page {
+    display: block;
+    float: left;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.preview-cart {
+    margin: 30px;
+}

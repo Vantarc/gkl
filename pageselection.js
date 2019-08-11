@@ -15,8 +15,7 @@ Vue.component('preview-page', {
 	template: `
 		<span class="preview-page" @click="toggle">
 			<canvas ref="canvas"></canvas><br>
-			<input type="checkbox" v-model="checked">
-			<label>Don't print this page.</label>
+			<md-checkbox v-model="checked" >Don't print this page.</md-checkbox>
 		</span>
 	`,
 	mounted() {
