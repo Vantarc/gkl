@@ -16,7 +16,7 @@ function upperPath(dir) {
 
 	var d = dir.split("/");
 	var d2 = d.slice(0, -1);
-	return d2.join("/");
+	return '/' + d2.join("/");
 }
 
 function filenameFromPath(dir) {

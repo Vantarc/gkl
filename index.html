@@ -3,46 +3,75 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-		<link rel= "stylesheet" href= "stylesheet.css">
-		<link rel= "stylesheet" href= "node_modules/vue-material/dist/vue-material.min.css">
+		<link rel= "stylesheet" href= "custom.css">
+		<link rel= "stylesheet" href= "node_modules/vue-material/dist/vue-material.css">
+		<link rel= "stylesheet" href= "node_modules/vue-material/dist/theme/default-dark.css">
 		<link rel="stylesheet" href="node_modules/roboto-fontface/css/roboto/roboto-fontface.css">
 		<link href="node_modules/material-design-icons/iconfont/material-icons.css" rel="stylesheet">
 	</head>
 	<body>
 		<div id="main">
-			<div class="header" id="cart-header">
-				<a href="#" @click="home">GKL - Gatrobe Knowledge Library</a>
+			<div class="page-container md-layout-column">
+				<md-toolbar class="md-primary">
+					<span class="md-title" ref="#" @click="home">
+						GKL - Gatrobe Knowledge Library
+					</span>
 
-				<cart-actions v-if="step == 1" v-bind:current-resource="currentResource"></cart-actions>
-				<a href="#" v-if="step > 1" @click="step = step - 1">Prev Step</a>
-				<a href="#" v-if="step < 3" @click="step = step + 1">Next Step</a>
+					<div class="md-toolbar-section-end">
+						<md-button @click="showCart = true" class="md-icon-button">
+							<md-icon>shopping_cart</md-icon>
+						</md-button>
+					</div>
+				</md-toolbar>
 
-				<cart-list></cart-list>
+				<md-drawer class="md-right" :md-active.sync="showCart" md-swipeable>
+					<md-toolbar class="md-transparent" md-elevation="0">
+						<span class="md-title">Cart</span>
+					</md-toolbar>
+					<cart-list></cart-list>
+				</md-drawer>
+
+				<md-content class="content">
+					<md-steppers>
+						<md-step id="first" md-label="Browse Lectures" @click="step = 1">
+							<div class="md-layout md-gutter">
+								<div class="md-layout-item md-size-33">
+									<file-list ref="fileList" v-on:show="showResource"></file-list>
+								</div>
+								<div class="md-layout-item">
+									<div v-if="currentResource !== null">
+										<iframe onload="modifyPDFJS(this)" id="viewer-frame" src="node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
+									</div>
+									<div v-if="currentResource === null">
+										<md-empty-state
+											class="md-accent"
+											md-icon="mood_bad"
+											md-label="No file selected"
+											md-description="Browse the directories and select a file you want to see">
+										</md-empty-state>
+									</div>
+
+								</div>
+							</div>
+						</md-step>
+
+						<md-step id="second" md-label="View Selected Pages" @click="step = 2">
+							<preview-cart></preview-cart>
+						</md-step>
+
+						<md-step id="third" md-label="Export PDF" @click="step = 2">
+							<cart-summary></cart-summary>
+
+							<cart-merged-view></cart-merged-view>
+						</md-step>
+					</md-steppers>
+				</md-content>
 			</div>
-
-			<template v-if="step === 1">
-
-				<file-list ref="fileList" v-on:show="showResource"></file-list>
-
-				<iframe onload="modifyPDFJS(this)" id="viewer-frame" src="node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
-
-			</template>
-			<template v-if="step === 2">
-				<preview-cart></preview-cart>
-			</template>
-			<template v-if="step === 3">
-
-				<cart-summary></cart-summary>
-
-				<cart-merged-view></cart-merged-view>
-
-			</template>
 		</div>
 
-		// Node modules
 		<script src="node_modules/vue/dist/vue.js"></script>
 		<script src="node_modules/pdfjs-dist-viewer-min/build/minified/build/pdf.js"></script>
-		<script src="node_modules/vue-material/dist/vue-material.min.js"></script>
+		<script src="node_modules/vue-material/dist/vue-material.js"></script>
 		<script src="node_modules/pdf-lib/dist/pdf-lib.js" charset="utf-8"></script>
 
 

@@ -1,11 +1,13 @@
-Vue.use(VueMaterial);
+Vue.use(VueMaterial.default);
+
 const debug = true;
 
 const main = new Vue({
     el: "#main",
     data: {
         step: 1,
-        currentResource: null
+        currentResource: null,
+        showCart: false
     },
     methods: {
 

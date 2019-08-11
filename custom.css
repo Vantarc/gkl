@@ -1,0 +1,25 @@
+body {
+    overflow: hidden;
+}
+
+.content {
+    padding: 1rem;
+    max-height:  calc(100vh - 55px) !important;
+
+}
+
+.disabled-list-item {
+    pointer-events: none;
+    cursor: default;
+}
+
+iframe {
+    width: 100%;
+    height: calc(100vh - 220px) !important;
+}
+
+#file-list {
+    overflow-y: scroll;
+    margin: 0;
+    height: calc(100vh - 220px) !important;
+}

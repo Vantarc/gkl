@@ -48,6 +48,15 @@ var cart = {
 		if (Object.keys(this.courses[course].resources).length < 1)
 			Vue.delete(this.courses, course);
 	},
+	numberOfItems() {
+		var count = 0;
+		for (var course of Object.values(this.courses)) {
+			for (var res of Object.values(course.resources)) {
+				count += 1;
+			}
+		}
+		return count;
+	},
 	clearCart() {
 		this.courses = {};
 	},
@@ -112,33 +121,33 @@ Vue.component('cart-actions', {
 			debug: debug
 		}
 	},
-	props: ['currentResource'],
+	props: ['resource'],
 	template: `
-		<span class="sub">
-			<span v-if="currentResource === null">Please choose a PDF.</span>
-			<a v-if="debug" @click="debugCart" href="#">Select DebugCart</a>
-			<template v-if="currentResource !== null">
-				<span>{{ currentResource }}</span>
-				<a v-if="!currentAdded" @click="addToCart" href="#">Add to Cart</a>
-				<a v-if="currentAdded" @click="removeFromCart" href="#">Remove from Cart</a>
-			</template>
+		<span>
+			<md-button v-if="!currentAdded" class="md-icon-button md-list-action" @click="addToCart">
+			  <md-icon class="md-primary">add</md-icon>
+			</md-button>
+			<md-button v-if="currentAdded" class="md-icon-button md-list-action" @click="removeFromCart">
+			  <md-icon class="md-accent">remove</md-icon>
+			</md-button>
 		</span>
 	`,
 	methods: {
-		addToCart() { this.cart.addToCart(this.currentResource) },
-		debugCart() {
-			this.cart.addToCart('/3D_Audio/Kurzklausuren/SS2018_1.pdf');
-			this.cart.addToCart('/Ausbreitung elektromagnetischer Wellen/Skript/2009/Wellenausbreitung_V_OK_WS09-10_Kap1.pdf');
-			this.cart.addToCart('/Ausbreitung elektromagnetischer Wellen/Skript/2009/Wellenausbreitung_V_OK_WS09-10_Kap2.pdf');
+		addToCart(event) {
+			this.cart.addToCart(this.resource);
+			event.stopPropagation();
 		},
-		removeFromCart() { this.cart.removeFromCart(this.currentResource) }
+		removeFromCart(event) {
+			this.cart.removeFromCart(this.resource);
+			event.stopPropagation();
+		}
 	},
 	computed: {
 		currentAdded() {
 			for (var course of Object.values(this.cart.courses)) {
 				for (var res of Object.values(course.resources)) {
 					// check whether current item is in cart
-					if (this.currentResource === res.resource)
+					if (this.resource === res.resource)
 						return true;
 				}
 			}
@@ -155,8 +164,14 @@ Vue.component('cart-list', {
 		}
 	},
 	template: `
-		<span class="sub">
-			<a @click="toggleCart" class="right" id="cart-btn" href="#">Cart ({{ count }})</a>
+		<md-list>
+			  <md-list-item>
+				<md-icon>move_to_inbox</md-icon>
+				<span class="md-list-item-text">Inbox{{ cart.numberOfItems()}}</span>
+			  </md-list-item>
+		</md-list>
+		<!--<span class="sub">
+			&lt;!&ndash;<a @click="toggleCart" class="right" id="cart-btn" href="#">Cart ({{ count }})</a>
 			<div id="cart" v-bind:style="{ display: cartVisible ? 'block' : 'none' }">
 				<div v-for="course in cart.courses">
 					<h2>{{ course.course }}</h2>
@@ -164,23 +179,12 @@ Vue.component('cart-list', {
 						<li v-for="res in course.resources">{{res.resource}}</li>
 					</ul>
 				</div>
-			</div>
-		</span>
+			</div>&ndash;&gt;
+		</span>-->
 	`,
 	methods: {
 		toggleCart() {
 			this.cartVisible = !this.cartVisible;
-		}
-	},
-	computed: {
-		count() {
-			var count = 0;
-			for (var course of Object.values(this.cart.courses)) {
-				for (var res of Object.values(course.resources)) {
-					count += 1;
-				}
-			}
-			return count;
 		}
 	}
 });
@@ -212,7 +216,17 @@ Vue.component('cart-merged-view', {
 		}
 	},
 	template: `
-		<iframe @load="load" id="viewer-final" src="node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
+	<span>
+	<iframe v-if="cart.numberOfItems() > 0" @load="load" id="viewer-final" src="node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
+	<md-empty-state
+		v-if="cart.numberOfItems() === 0"
+		class="md-accent"
+		md-icon="warning"
+		md-label="Empty Cart"
+		md-description="You have no files in your cart">
+	</md-empty-state>
+	</span>
+		
 	`,
 	methods: {
 		async load() {

@@ -108,7 +108,12 @@ Vue.component('preview-cart', {
 	template: `
 		<div class="preview-cart">
 			<div v-if="Object.keys(cart.courses).length < 1">
-				<h2>ERROR: Cart is empty</h2>
+				<md-empty-state
+					class="md-accent"
+					md-icon="warning"
+					md-label="Empty Cart"
+					md-description="You have no files in your cart">
+				</md-empty-state>
 			</div>
 			<div v-for="course in cart.courses">
 				<h2>{{ course.course }}</h2>
