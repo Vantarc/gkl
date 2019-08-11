@@ -170,17 +170,6 @@ Vue.component('cart-list', {
 				<span class="md-list-item-text">Inbox{{ cart.numberOfItems()}}</span>
 			  </md-list-item>
 		</md-list>
-		<!--<span class="sub">
-			&lt;!&ndash;<a @click="toggleCart" class="right" id="cart-btn" href="#">Cart ({{ count }})</a>
-			<div id="cart" v-bind:style="{ display: cartVisible ? 'block' : 'none' }">
-				<div v-for="course in cart.courses">
-					<h2>{{ course.course }}</h2>
-					<ul>
-						<li v-for="res in course.resources">{{res.resource}}</li>
-					</ul>
-				</div>
-			</div>&ndash;&gt;
-		</span>-->
 	`,
 	methods: {
 		toggleCart() {
@@ -216,17 +205,7 @@ Vue.component('cart-merged-view', {
 		}
 	},
 	template: `
-	<span>
-	<iframe v-if="cart.numberOfItems() > 0" @load="load" id="viewer-final" src="node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
-	<md-empty-state
-		v-if="cart.numberOfItems() === 0"
-		class="md-accent"
-		md-icon="warning"
-		md-label="Empty Cart"
-		md-description="You have no files in your cart">
-	</md-empty-state>
-	</span>
-		
+	<iframe  @load="load" id="viewer-final" src="node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
 	`,
 	methods: {
 		async load() {

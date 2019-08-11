@@ -13,9 +13,9 @@ Vue.component('preview-page', {
 	},
 	props: ['page', 'resource', 'pageIdx'],
 	template: `
-		<span class="preview-page" @click="toggle">
-			<canvas ref="canvas"></canvas><br>
-			<md-checkbox v-model="checked" >Don't print this page.</md-checkbox>
+		<span class="preview-page">
+			<canvas ref="canvas" @click="toggle"></canvas><br>
+			<md-checkbox v-model="checked">Don't print this page.</md-checkbox>
 		</span>
 	`,
 	mounted() {
@@ -115,7 +115,7 @@ Vue.component('preview-cart', {
 				</md-empty-state>
 			</div>
 			<div v-for="course in cart.courses">
-				<h2>{{ course.course }}</h2>
+				<span class="md-display-1">{{ course.course }}</span>
 				<div v-for="resource in course.resources">
 					<h3>{{ resource.resource }}</h3>
 					<preview-resource :resource="resource.resource"/>

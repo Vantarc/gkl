@@ -33,7 +33,7 @@
 
 				<md-content class="content">
 					<md-steppers>
-						<md-step id="first" md-label="Browse Lectures" @click="step = 1">
+						<md-step id="first" md-label="Browse Lectures">
 							<div class="md-layout md-gutter">
 								<div class="md-layout-item md-size-33">
 									<file-list ref="fileList" v-on:show="showResource"></file-list>
@@ -55,13 +55,26 @@
 							</div>
 						</md-step>
 
-						<md-step id="second" md-label="View Selected Pages" @click="step = 2">
+						<md-step id="second" md-label="View Selected Pages">
 							<preview-cart></preview-cart>
 						</md-step>
 
-						<md-step id="third" md-label="Export PDF" @click="step = 2">
-							<cart-summary></cart-summary>
-							<cart-merged-view></cart-merged-view>
+						<md-step id="third" md-label="Export PDF">
+							<md-empty-state
+									v-if="cart.numberOfItems() === 0"
+									class="md-accent"
+									md-icon="warning"
+									md-label="Empty Cart"
+									md-description="You have no files in your cart">
+							</md-empty-state>
+							<div class="md-layout md-gutter" v-if="cart.numberOfItems() > 0">
+								<div class="md-layout-item md-size-30">
+									<cart-summary></cart-summary>
+								</div>
+								<div class="md-layout-item">
+									<cart-merged-view></cart-merged-view>
+								</div>
+							</div>
 						</md-step>
 					</md-steppers>
 				</md-content>

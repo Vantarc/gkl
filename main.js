@@ -7,7 +7,8 @@ const main = new Vue({
     data: {
         step: 1,
         currentResource: null,
-        showCart: false
+        showCart: false,
+        cart
     },
     methods: {
 
