@@ -6,7 +6,7 @@ function encodePath(dir) {
 		x = encodeURIComponent(x);
 		d2.push(x);
 	}
-	d2 = d2.join("/")
+	d2 = d2.join("/");
 	return d2;
 }
 
@@ -16,7 +16,7 @@ function upperPath(dir) {
 
 	var d = dir.split("/");
 	var d2 = d.slice(0, -1);
-	return '/' + d2.join("/");
+	return d2.join("/") + "/";
 }
 
 function filenameFromPath(dir) {
