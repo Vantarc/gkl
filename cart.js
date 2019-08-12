@@ -57,6 +57,16 @@ var cart = {
 		}
 		return count;
 	},
+	numberOfPages() {
+		// TODO: Calculate the total number of pages
+		return 42;
+	},
+	isEmpty() {
+		return this.numberOfItems() === 0;
+	},
+	calculateCosts() {
+		return this.numberOfPages() * 0.005;
+	},
 	clearCart() {
 		this.courses = {};
 	},
@@ -164,12 +174,20 @@ Vue.component('cart-list', {
 		}
 	},
 	template: `
-		<md-list>
-			  <md-list-item>
-				<md-icon>move_to_inbox</md-icon>
-				<span class="md-list-item-text">Inbox{{ cart.numberOfItems()}}</span>
-			  </md-list-item>
-		</md-list>
+		<div>
+			<div v-if="cart.isEmpty()">
+				<md-empty-state
+					class="md-accent"
+					md-icon="warning"
+					md-label="Empty Cart"
+					md-description="You have no files in your cart">
+				</md-empty-state>
+			</div>
+			<div v-if="!cart.isEmpty()">
+				<cart-summary></cart-summary>
+			</div>
+		</div>
+		
 	`,
 	methods: {
 		toggleCart() {
@@ -185,16 +203,30 @@ Vue.component('cart-summary', {
 		}
 	},
 	template: `
-		<div class="cart-summary">
-			<div>
-				<div v-for="course in cart.courses">
-					<h2>{{ course.course }}</h2>
-					<ul>
-						<li v-for="res in course.resources">{{res.resource}}</li>
-					</ul>
+	<div>
+		<md-list class="md-double-line" v-for="course in cart.courses">
+			  <md-subheader class="wrap-text">{{ course.course }}</md-subheader>
+		
+			  <md-list-item v-for="res in course.resources">
+				<md-icon>insert_drive_file</md-icon>
+		
+				<div class="md-list-item-text wrap-text">
+				  {{res.resource}}
 				</div>
-			</div>
-		</div>
+			  </md-list-item>
+		  </md-list>
+		  <md-divider></md-divider>
+		  <md-subheader class="wrap-text">
+		  	<span>Number of pages</span>
+		  	<span class="fill-remaining-space"></span>
+		  	<span>{{ cart.numberOfPages() }}</span>
+		  </md-subheader>
+		  <md-subheader class="wrap-text">
+		  	<span>Price</span>
+		  	<span class="fill-remaining-space"></span>
+		  	<span>{{ cart.calculateCosts() | toCurrency }}</span>
+		  </md-subheader>
+	</div>
 	`,
 });
 
@@ -226,4 +258,16 @@ Vue.component('cart-merged-view', {
 			deep: true
 		}
 	}
+});
+
+Vue.filter('toCurrency', function (value) {
+	if (typeof value !== "number") {
+		return value;
+	}
+	const formatter = new Intl.NumberFormat('de-DE', {
+		style: 'currency',
+		currency: 'EUR',
+		minimumFractionDigits: 0
+	});
+	return formatter.format(value);
 });

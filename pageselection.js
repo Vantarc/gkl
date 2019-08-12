@@ -106,7 +106,7 @@ Vue.component('preview-cart', {
 	},
 	template: `
 		<div class="preview-cart">
-			<div v-if="Object.keys(cart.courses).length < 1">
+			<div v-if="cart.isEmpty()">
 				<md-empty-state
 					class="md-accent"
 					md-icon="warning"

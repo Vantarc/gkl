@@ -46,3 +46,12 @@ iframe {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.wrap-text {
+    word-wrap: break-word !important;
+    white-space: normal !important;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto !important;
+}
