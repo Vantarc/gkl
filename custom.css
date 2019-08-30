@@ -41,6 +41,11 @@ iframe {
     margin-right: 30px;
 }
 
+.transparent-image {
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* Internet Explorer */
+}
+
 .preview-cart {
     height: calc(100vh - 220px) !important;
     overflow-y: scroll;

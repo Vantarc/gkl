@@ -14,7 +14,7 @@ Vue.component('preview-page', {
 	props: ['page', 'resource', 'pageIdx'],
 	template: `
 		<span class="preview-page">
-			<canvas ref="canvas" @click="toggle"></canvas><br>
+			<canvas ref="canvas" @click="toggle" v-bind:class="{ 'transparent-image': checked }"></canvas><br>
 			<md-checkbox v-model="checked">Don't print this page.</md-checkbox>
 		</span>
 	`,
