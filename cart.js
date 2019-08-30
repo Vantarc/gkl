@@ -4,6 +4,7 @@ var PDFDocument = PDFLib.PDFDocument;
 // state pattern: https://vuejs.org/v2/guide/state-management.html#Simple-State-Management-from-Scratch
 var cart = {
 	courses: {},
+	_numberOfPages: 0,
 	addToCart(resource) {
 		if (resource === null)
 			return;
@@ -58,8 +59,7 @@ var cart = {
 		return count;
 	},
 	numberOfPages() {
-		// TODO: Calculate the total number of pages
-		return 42;
+		return this._numberOfPages;
 	},
 	isEmpty() {
 		return this.numberOfItems() === 0;
@@ -100,6 +100,8 @@ var cart = {
 				await this._addToPDF(pdfDoc, res.resource);
 			}
 		}
+
+		this._numberOfPages = pdfDoc.getPageCount();
 
 		return await pdfDoc.save();
 	},
