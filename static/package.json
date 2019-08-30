@@ -1,0 +1,27 @@
+{
+  "name": "gatrobeknowledgelibrary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gatrobe/GatrobeKnowledgeLibrary.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gatrobe/GatrobeKnowledgeLibrary/issues"
+  },
+  "homepage": "https://github.com/Gatrobe/GatrobeKnowledgeLibrary#readme",
+  "dependencies": {
+    "material-design-icons": "^3.0.1",
+    "pdf-lib": "^1.0.1",
+    "pdfjs-dist-viewer-min": "^2.2.228",
+    "roboto-fontface": "^0.10.0",
+    "vue": "^2.6.10",
+    "vue-material": "^1.0.0-beta-11"
+  }
+}
