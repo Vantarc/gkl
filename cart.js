@@ -65,7 +65,7 @@ var cart = {
 		return this.numberOfItems() === 0;
 	},
 	calculateCosts() {
-		return this.numberOfPages() * 0.005;
+		return this.numberOfPages() * 0.05;
 	},
 	clearCart() {
 		this.courses = {};
