@@ -12,70 +12,31 @@
 	<body>
 		<div id="main">
 			<div class="page-container md-layout-column">
-				<md-toolbar class="md-primary">
-					<span class="md-title" ref="#" @click="home">
-						GKL - Gatrobe Knowledge Library
-					</span>
-
-					<div class="md-toolbar-section-end">
-						<md-button @click="showCart = true" class="md-icon-button">
-							<md-icon>shopping_cart</md-icon>
-						</md-button>
-					</div>
-				</md-toolbar>
-
-				<md-drawer class="md-right" :md-active.sync="showCart" md-swipeable>
-					<md-toolbar class="md-transparent" md-elevation="0">
-						<span class="md-title">Cart</span>
-					</md-toolbar>
-					<cart-list></cart-list>
-				</md-drawer>
+        {% include 'toolbar.html' %}
+        {% include 'sidebar.html' %}
 
 				<md-content class="content">
 					<md-steppers>
-						<md-step id="first" md-label="Browse Lectures">
-							<div class="md-layout md-gutter">
-								<div class="md-layout-item md-size-33">
-									<file-list ref="fileList" v-on:show="showResource"></file-list>
-								</div>
-								<div class="md-layout-item">
-									<div v-if="currentResource !== null">
-										<iframe onload="modifyPDFJS(this)" id="viewer-frame" src="{{ url_for('static', filename='node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html', file='')}}"></iframe>
-									</div>
-									<div v-if="currentResource === null">
-										<md-empty-state
-											class="md-accent"
-											md-icon="mood_bad"
-											md-label="No file selected"
-											md-description="Browse the directories and select a file you want to see">
-										</md-empty-state>
-									</div>
 
-								</div>
-							</div>
+            {# First step: An introduction and acceptance of the conditions #}
+            <md-step id="first" md-label="Getting Started">
+              {% include 'tutorial.html' %}
 						</md-step>
 
-						<md-step id="second" md-label="View Selected Pages">
+            {# Second step: A list of all lectures and a preview of the currently selected document #}
+						<md-step id="second" md-label="Browse Lectures">
+              {% include 'browse_lectures.html' %}
+						</md-step>
+
+            {# Third step: An overview of all included pages of all PDF files with the option to remove
+               specific pages #}
+						<md-step id="third" md-label="View Selected Pages">
 							<preview-cart></preview-cart>
 						</md-step>
 
-						<md-step id="third" md-label="Export PDF">
-							<md-empty-state
-									v-if="cart.numberOfItems() === 0"
-									class="md-accent"
-									md-icon="warning"
-									md-label="Empty Cart"
-									md-description="You have no files in your cart">
-							</md-empty-state>
-							<div class="md-layout md-gutter" v-if="cart.numberOfItems() > 0">
-								<div class="md-layout-item md-size-30">
-									<h1 class="md-title">Summary</h1>
-									<cart-summary></cart-summary>
-								</div>
-								<div class="md-layout-item">
-									<cart-merged-view></cart-merged-view>
-								</div>
-							</div>
+            {# Fouth step: Preview of the generated PDF and a checkout option #}
+						<md-step id="fourth" md-label="Export PDF">
+              {% include 'export_pdf.html' %}
 						</md-step>
 					</md-steppers>
 				</md-content>
