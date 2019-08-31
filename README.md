@@ -1,23 +1,46 @@
 # Gatrobe Knowledge Library
 
-## Description
+## Table of content
 
-[TODO]
+1.  [About GKL](#about-gkl)
+2.  [Dependencies](#dependencies)
+3.  [Getting started](#getting-started)
+4.  [Setting up autostart](#setting-up-autostart-systemd)
+5.  [Setting up apache](#setting-up-apache)
 
-## Getting started
+### About GKL
 
-Add an account for the GKL called `gkl_user`. Since this account is only for running GKL
-the extra arguments of -r is added to create a system account without creating a home directory:
+The `Gatrobe Knowledge Lib, (GKL)` is there to browse and view all documents from the `Gatrobe Library`.
+You can view the individual files (currently only PDF files!) and add them to your shopping cart.
+In the next step you can have a look at all pages again in an overview and if necessary select individual
+pages which are not desired or not needed.
+In the last step a PDF file is created, which contains all pages and can be printed afterwards by a
+member of the community by input of a password.
+
+### Dependencies
+
+In order to use GKL, you need to install the following main dependencies:
+  1. Python 3
+  2. Python 3 Virtual Environment
+  3. git
 
 ```bash
-$ sudo useradd -r gkl_user
+$ sudo apt install python3 python3-venv git
+```
+
+### Getting started
+
+Add an account for the GKL called `gkl_user`:
+
+```bash
+$ sudo useradd gkl_user
 ```
 
 Next we will create a directory for the installation of GKL and change the owner to the `gkl_user` account:
 
 ```bash
 $ cd /srv
-$ sudo git clone git@github.com:Gatrobe/GatrobeKnowledgeLibrary.git
+$ sudo git clone https://github.com/Gatrobe/GatrobeKnowledgeLibrary.git
 $ sudo chown -R gkl_user:gkl_user GatrobeKnowledgeLibrary
 ```
 
@@ -27,13 +50,25 @@ Next up is to create and change to a virtual environment for GKL. This will be d
 $ sudo su -s /bin/bash gkl_user
 $ cd /srv/GatrobeKnowledgeLibrary
 $ python3 -m venv venv
-$ source activate venv/bin/activate
+$ source venv/bin/activate
+```
+
+Copy the `credentials.js.example` file to `credentials.js` and change the content:
+
+```bash
+(venv) cp static/credentials.js.example static/credentials.js
+(venv) # Now do your changes to the credentials.js file
+```
+
+Install all requirements:
+
+```bash
 (venv) pip install -r requirements.txt
 (venv) cd static
 (venv) npm install
 ```
 
-## Set up autostart (systemd)
+### Setting up autostart (systemd)
 
 It is advisable to run GKL as a systemd service:
 
@@ -76,6 +111,61 @@ $ sudo systemctl disable gatrobe-knowledge-library@gkl_user
 To start GKL now, use this command:
 ```bash
 $ sudo systemctl start gatrobe-knowledge-library@gkl_user
+```
+
+### Setting up apache
+
+
+Below you can see the apache configuration file for GKL, which goes in
+`/etc/apache2/sites-available/gatrobe_knowledge_library.conf`:
+
+```bash
+<IfModule mod_ssl.c>
+    <VirtualHost _default_:80>
+        ServerName <Your Domain>
+        ServerSignature Off
+        RewriteEngine On
+        RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+        ErrorLog /var/log/apache2/redirect.error.log
+        LogLevel warn
+    </VirtualHost>
+    
+    <VirtualHost _default_:443>
+        ServerName <Your Domain>
+    
+        ProxyPass / http://127.0.0.1:8000/
+        ProxyPassReverse / http://127.0.0.1:8000/
+    
+        ErrorLog ${APACHE_LOG_DIR}/gkl_error.log
+        CustomLog ${APACHE_LOG_DIR}/gkl_access.log combined
+    
+        SSLEngine on
+    
+        #SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire
+        <FilesMatch "\.(cgi|shtml|phtml|php)$">
+                        SSLOptions +StdEnvVars
+        </FilesMatch>
+        <Directory /usr/lib/cgi-bin>
+                        SSLOptions +StdEnvVars
+        </Directory>
+    
+        BrowserMatch    "MSIE [2-6]" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
+        # MSIE 7 and newer should be able to use keepalive
+        BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+    
+        Include /etc/letsencrypt/options-ssl-apache.conf
+        SSLCertificateFile <Your certificate>
+        SSLCertificateKeyFile <Your key>
+    </VirtualHost>
+</IfModule>
+```
+
+Create a symlink to enable your virtual host and restart apache2:
+
+```bash
+$ cd /etc/apache2/sites-enabled/
+$ sudo ln -s ../sites-available/gatrobe_knowledge_library.conf .
+$ sudo systemctl restart apache2
 ```
 
 
