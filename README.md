@@ -169,6 +169,15 @@ Below you can see the apache configuration file for GKL, which goes in
         <Directory /usr/lib/cgi-bin>
                         SSLOptions +StdEnvVars
         </Directory>
+
+	# Only allow Access from Gatrobe-Internal Sites
+	<Location />
+                Order allow,deny
+                Allow from 172.16.0.0/12
+                Allow from 130.75.178.0/27
+                Allow from 127
+	</Location>
+
     
         BrowserMatch    "MSIE [2-6]" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
         # MSIE 7 and newer should be able to use keepalive
