@@ -81,7 +81,7 @@ Install all requirements:
 ### Setting up cups
 
 - Configure cups via port forwarding ```ssh root@gat-lib -L 12345:localhost:631```. Go to http://localhost:12345/ in your browser.
-    - Make sure, that duplex and black/white printing is enabled!
+    - Make sure, that duplex disabled and black/white printing is enabled!
     - Do not forget to set the UserCode via the web interface.
 - Be sure, a default printer is set:
     - List all available printers: ```lpstat -p -d```
