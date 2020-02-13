@@ -65,9 +65,12 @@ def upload_file():
         filename = secure_filename(file.filename)
         dest_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(dest_path)
+        extra = ""
         if not app.config['DO_NOT_PRINT']:
             os.system("lp " + dest_path)
-        return json_response(200, "Printing...")
+        else:
+            extra = " (Printing is disabled server side, so the file was just uploaded but not printed)"
+        return json_response(200, "Printing..." + extra)
     else:
         return json_response(400, "You can only upload PDFs for printing.")
 
