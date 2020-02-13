@@ -5,6 +5,7 @@ var PDFDocument = PDFLib.PDFDocument;
 var cart = {
 	courses: {},
 	_numberOfPages: 0,
+	pricePerPage: 0.05,
 	addToCart(resource) {
 		if (resource === null)
 			return;
@@ -65,7 +66,7 @@ var cart = {
 		return this.numberOfItems() === 0;
 	},
 	calculateCosts() {
-		return this.numberOfPages() * 0.05;
+		return this.numberOfPages() * this.pricePerPage;
 	},
 	clearCart() {
 		this.courses = {};
@@ -189,7 +190,7 @@ Vue.component('cart-list', {
 				<cart-summary></cart-summary>
 			</div>
 		</div>
-		
+
 	`,
 	methods: {
 		toggleCart() {
@@ -198,20 +199,37 @@ Vue.component('cart-list', {
 	}
 });
 
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
 Vue.component('cart-summary', {
 	data: function () {
 		return {
-			cart: cart
+			cart: cart,
+			printDialogVisible: false,
+			printingPassword: null,
+			alertMessageVisible: false,
+			alertMessageText: null,
 		}
 	},
 	template: `
 	<div>
 		<md-list class="md-double-line" v-for="course in cart.courses">
 			  <md-subheader class="wrap-text">{{ course.course }}</md-subheader>
-		
+
 			  <md-list-item v-for="res in course.resources">
 				<md-icon>insert_drive_file</md-icon>
-		
+
 				<div class="md-list-item-text wrap-text">
 				  {{res.resource}}
 				</div>
@@ -224,12 +242,63 @@ Vue.component('cart-summary', {
 		  	<span>{{ cart.numberOfPages() }}</span>
 		  </md-subheader>
 		  <md-subheader class="wrap-text">
-		  	<span>Price</span>
+		  	<span>Price per Page</span>
+		  	<span class="fill-remaining-space"></span>
+		  	<span>{{ cart.pricePerPage | toCurrency }}</span>
+		  </md-subheader>
+		  <md-subheader class="wrap-text">
+		  	<span>Total Price</span>
 		  	<span class="fill-remaining-space"></span>
 		  	<span>{{ cart.calculateCosts() | toCurrency }}</span>
 		  </md-subheader>
+		  <!-- <md-button class="md-dense md-raised md-primary" @click="download">Download</md-button> -->
+		  <md-dialog-prompt
+			:md-active.sync="printDialogVisible"
+			v-model="printingPassword"
+			md-title="Please ask a Gatrobe member for the printing password!"
+			md-input-placeholder="Password..."
+			md-confirm-text="Print!"
+			@md-confirm="print" />
+		  <md-dialog-alert
+			:md-active.sync="alertMessageVisible"
+			:md-content="alertMessageText"
+			md-confirm-text="Ok" />
+
+		  <md-button class="md-dense md-raised md-primary" @click="printDialogVisible = true">Print</md-button>
 	</div>
 	`,
+	methods: {
+		async print() {
+			var data = await cart.mergedPDF();
+			let headers = new Headers();
+
+			var form = new FormData();
+			var blob = new Blob([data], {type: "application/octet-binary"});
+			form.append('file', blob, (new Date()).toISOString() + '-merged.pdf');
+
+			headers.append('Authorization', 'Basic ' + btoa('gatrobe' + ":" + this.printingPassword));
+			this.printingPassword = "";
+
+			var response = await fetch('/print', {
+				headers: headers,
+				method: 'POST',
+				body: form
+			});
+
+			var j = await response.json();
+			this.alertMessageText = j.message;
+			this.alertMessageVisible = true;
+		},
+		async download() {
+			/* //This seems to be broken and crashes my firefox browser...
+
+			var data = await cart.mergedPDF();
+			var blob = new Blob(data, {type: 'application/octet-binary'});
+			var url = window.URL.createObjectURL(blob);
+			download('merged.pdf', url);
+			*/
+		}
+	}
 });
 
 Vue.component('cart-merged-view', {
@@ -239,7 +308,7 @@ Vue.component('cart-merged-view', {
 		}
 	},
 	template: `
-	<iframe  @load="load" id="viewer-final" src="node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
+	<iframe @load="load" id="viewer-final" src="static/node_modules/pdfjs-dist-viewer-min/build/minified/web/viewer.html?file=" ></iframe>
 	`,
 	methods: {
 		async load() {

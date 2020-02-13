@@ -60,6 +60,13 @@ Copy the `credentials.js.example` file to `credentials.js` and change the conten
 (venv) # Now do your changes to the credentials.js file
 ```
 
+Do the same for the Flask configuration:
+
+```bash
+(venv) cp configuration.example.py configuration.py
+(venv) # Now do your changes to the configuration.py
+```
+
 Install all requirements:
 
 ```bash
