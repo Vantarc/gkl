@@ -252,13 +252,25 @@ Vue.component('cart-summary', {
 		  	<span>{{ cart.calculateCosts() | toCurrency }}</span>
 		  </md-subheader>
 		  <!-- <md-button class="md-dense md-raised md-primary" @click="download">Download</md-button> -->
-		  <md-dialog-prompt
+		  <md-dialog
 			:md-active.sync="printDialogVisible"
-			v-model="printingPassword"
-			md-title="Please ask a Gatrobe member for the printing password!"
-			md-input-placeholder="Password..."
-			md-confirm-text="Print!"
-			@md-confirm="print" />
+			@md-confirm="print">
+
+			<md-dialog-title>Please ask a Gatrobe member for the printing password!</md-dialog-title>
+
+			<md-dialog-content>
+				<md-field>
+					<label>Password</label>
+					<md-input v-model="printingPassword" type="password"></md-input>
+				</md-field>
+			</md-dialog-content>
+
+			<md-dialog-actions>
+				<md-button class="md-primary" @click="printDialogAbort">Abort</md-button>
+				<md-button class="md-primary" @click="print">Print!</md-button>
+			</md-dialog-actions>
+
+		  </md-dialog>
 		  <md-dialog-alert
 			:md-active.sync="alertMessageVisible"
 			:md-content="alertMessageText"
@@ -268,6 +280,10 @@ Vue.component('cart-summary', {
 	</div>
 	`,
 	methods: {
+		async printDialogAbort() {
+			this.printingPassword = "";
+			this.printDialogVisible = false;
+		},
 		async print() {
 			var data = await cart.mergedPDF();
 			let headers = new Headers();
@@ -288,6 +304,7 @@ Vue.component('cart-summary', {
 			var j = await response.json();
 			this.alertMessageText = j.message;
 			this.alertMessageVisible = true;
+			this.printDialogVisible = false;
 		},
 		async download() {
 			/* //This seems to be broken and crashes my firefox browser...
