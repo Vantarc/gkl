@@ -60,3 +60,8 @@ iframe {
 .fill-remaining-space {
     flex: 1 1 auto !important;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+}

@@ -2,12 +2,13 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title></title>
-		<link rel= "stylesheet" href= "{{ url_for('static', filename='custom.css')}}">
-		<link rel= "stylesheet" href= "{{ url_for('static', filename='node_modules/vue-material/dist/vue-material.css')}}">
-    <link rel= "stylesheet" href= "{{ url_for('static', filename='node_modules/vue-material/dist/theme/default-dark.css')}}">
-    <link rel= "stylesheet" href= "{{ url_for('static', filename='node_modules/roboto-fontface/css/roboto/roboto-fontface.css')}}">
-    <link rel= "stylesheet" href= "{{ url_for('static', filename='node_modules/material-design-icons/iconfont/material-icons.css')}}">
+		<title>GKL</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel= "stylesheet" href= "{{ url_for('static', filename='custom.css') }}">
+		<link rel= "stylesheet" href= "{{ url_for('static', filename='node_modules/vue-material/dist/vue-material.css') }}">
+    <link rel= "stylesheet" href= "{{ url_for('static', filename='node_modules/vue-material/dist/theme/default-dark.css') }}">
+    <link rel= "stylesheet" href= "{{ url_for('static', filename='node_modules/roboto-fontface/css/roboto/roboto-fontface.css') }}">
+    <link rel= "stylesheet" href= "{{ url_for('static', filename='node_modules/material-design-icons/iconfont/material-icons.css') }}">
 	</head>
 	<body>
 		<div id="main">
@@ -20,7 +21,7 @@
 
             {# First step: An introduction and acceptance of the conditions #}
             <md-step id="first" md-label="Getting Started">
-              {% include 'tutorial.html' %}
+              {% include 'welcome.html' %}
 						</md-step>
 
             {# Second step: A list of all lectures and a preview of the currently selected document #}
@@ -43,18 +44,18 @@
 			</div>
 		</div>
 
-		<script src="{{ url_for('static', filename='node_modules/vue/dist/vue.js')}}"></script>
-    <script src="{{ url_for('static', filename='node_modules/pdfjs-dist-viewer-min/build/minified/build/pdf.js')}}"></script>
-    <script src="{{ url_for('static', filename='node_modules/vue-material/dist/vue-material.js')}}"></script>
-    <script src="{{ url_for('static', filename='node_modules/pdf-lib/dist/pdf-lib.js')}}"></script>
+		<script src="{{ url_for('static', filename='node_modules/vue/dist/vue.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/pdfjs-dist-viewer-min/build/minified/build/pdf.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/vue-material/dist/vue-material.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/pdf-lib/dist/pdf-lib.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='credentials.js')}}"></script>
-    <script src="{{ url_for('static', filename='modify_pdfjs.js')}}"></script>
-    <script src="{{ url_for('static', filename='pageselection.js')}}"></script>
-    <script src="{{ url_for('static', filename='filelist.js')}}"></script>
-    <script src="{{ url_for('static', filename='minidav2.js')}}"></script>
-    <script src="{{ url_for('static', filename='cart.js')}}"></script>
-    <script src="{{ url_for('static', filename='main.js')}}"></script>
+    <script src="{{ url_for('static', filename='credentials.js') }}"></script>
+    <script src="{{ url_for('static', filename='modify_pdfjs.js') }}"></script>
+    <script src="{{ url_for('static', filename='pageselection.js') }}"></script>
+    <script src="{{ url_for('static', filename='filelist.js') }}"></script>
+    <script src="{{ url_for('static', filename='minidav2.js') }}"></script>
+    <script src="{{ url_for('static', filename='cart.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 
 		<script type="text/javascript">
 			Vue.config.devtools = true
