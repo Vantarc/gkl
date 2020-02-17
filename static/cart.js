@@ -5,7 +5,8 @@ var PDFDocument = PDFLib.PDFDocument;
 var cart = {
 	courses: {},
 	_numberOfPages: 0,
-	pricePerPage: 0.05,
+    pricePerPage: 0.05,
+    priceDepositPerCourse: 15,
 	addToCart(resource) {
 		if (resource === null)
 			return;
@@ -59,15 +60,24 @@ var cart = {
 		}
 		return count;
 	},
+    numberOfCourses() {
+	    return Object.values(this.courses).length;
+    },
 	numberOfPages() {
 		return this._numberOfPages;
 	},
 	isEmpty() {
 		return this.numberOfItems() === 0;
 	},
-	calculateCosts() {
+	calculateCopyCosts() {
 		return this.numberOfPages() * this.pricePerPage;
 	},
+    calculateDepositCosts() {
+	    return this.numberOfCourses() * this.priceDepositPerCourse;
+    },
+    calculateCosts() {
+	    return this.calculateCopyCosts() + this.calculateDepositCosts();
+    },
 	clearCart() {
 		this.courses = {};
 	},
@@ -224,10 +234,9 @@ Vue.component('cart-summary', {
 	},
 	template: `
 	<div>
-		<md-list class="md-double-line" v-for="course in cart.courses">
+		<md-list class="md-double-line" v-for="course in cart.courses" v-bind:key="course.course">
 			  <md-subheader class="wrap-text">{{ course.course }}</md-subheader>
-
-			  <md-list-item v-for="res in course.resources">
+			  <md-list-item v-for="res in course.resources" v-bind:key="res.id">
 				<md-icon>insert_drive_file</md-icon>
 
 				<div class="md-list-item-text wrap-text">
@@ -237,15 +246,25 @@ Vue.component('cart-summary', {
 		  </md-list>
 		  <md-divider></md-divider>
 		  <md-subheader class="wrap-text">
-		  	<span>Number of pages</span>
+		  	<span>Copy Costs</span>
 		  	<span class="fill-remaining-space"></span>
-		  	<span>{{ cart.numberOfPages() }}</span>
+		  	<span>{{ cart.numberOfPages() }} x {{ cart.pricePerPage | toCurrency }}</span>
 		  </md-subheader>
 		  <md-subheader class="wrap-text">
-		  	<span>Price per Page</span>
 		  	<span class="fill-remaining-space"></span>
-		  	<span>{{ cart.pricePerPage | toCurrency }}</span>
+		  	<span>= {{ cart.calculateCopyCosts() | toCurrency }} </span>
 		  </md-subheader>
+          <md-divider></md-divider>
+		  <md-subheader class="wrap-text">
+		  	<span>Deposit Costs</span>
+		  	<span class="fill-remaining-space"></span>
+		  	<span>{{ cart.numberOfCourses() }} x {{ cart.priceDepositPerCourse | toCurrency }}</span>
+		  </md-subheader>
+		  <md-subheader class="wrap-text">
+		  	<span class="fill-remaining-space"></span>
+		  	<span>= {{ cart.calculateDepositCosts() | toCurrency }} </span>
+		  </md-subheader>
+          <md-divider></md-divider>
 		  <md-subheader class="wrap-text">
 		  	<span>Total Price</span>
 		  	<span class="fill-remaining-space"></span>
