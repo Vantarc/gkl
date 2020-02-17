@@ -1,5 +1,6 @@
 Click
 Flask
+Flask-HTTPAuth
 itsdangerous
 Jinja2
 MarkupSafe

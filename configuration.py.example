@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+__author__ = 'g3n35i5'
+
+
+class Configuration:
+    HOST = '127.0.0.1'
+    PORT = 8000
+    PRINTING_PASSWORD = '123456'
+    DO_NOT_PRINT = False   # If this is set to True, the lp binary will not be
+                           # invoked and nothing will be printed. The file will
+                           # just be uploaded to /tmp. This is helpful while
+                           # debugging.

@@ -17,15 +17,18 @@ pages which are not desired or not needed.
 In the last step a PDF file is created, which contains all pages and can be printed afterwards by a
 member of the community by input of a password.
 
+![Application Schema](docs/schema.png)
+
 ### Dependencies
 
 In order to use GKL, you need to install the following main dependencies:
   1. Python 3
   2. Python 3 Virtual Environment
   3. git
+  4. lp and cups
 
 ```bash
-$ sudo apt install python3 python3-venv git
+$ sudo apt install python3 python3-venv git cups
 ```
 
 ### Getting started
@@ -60,6 +63,13 @@ Copy the `credentials.js.example` file to `credentials.js` and change the conten
 (venv) # Now do your changes to the credentials.js file
 ```
 
+Do the same for the Flask configuration:
+
+```bash
+(venv) cp configuration.example.py configuration.py
+(venv) # Now do your changes to the configuration.py
+```
+
 Install all requirements:
 
 ```bash
@@ -67,6 +77,17 @@ Install all requirements:
 (venv) cd static
 (venv) npm install
 ```
+
+### Setting up cups
+
+- Configure cups via port forwarding ```ssh root@gat-lib -L 12345:localhost:631```. Go to http://localhost:12345/ in your browser.
+    - Make sure, that duplex is disabled and black/white printing is enabled!
+    - Do not forget to set the UserCode via the web interface.
+- Be sure, a default printer is set:
+    - List all available printers: ```lpstat -p -d```
+    - If the command returns "no system default destination", no default printer is set!
+    - Set the default printer: ```lpadmin -d <PRINTERNAME>```.
+- You can do a test print by invoking ```echo "test" | lp``` from the commandline.
 
 ### Setting up autostart (systemd)
 
@@ -148,6 +169,15 @@ Below you can see the apache configuration file for GKL, which goes in
         <Directory /usr/lib/cgi-bin>
                         SSLOptions +StdEnvVars
         </Directory>
+
+	# Only allow Access from Gatrobe-Internal Sites
+	<Location />
+                Order allow,deny
+                Allow from 172.16.0.0/12
+                Allow from 130.75.178.0/27
+                Allow from 127
+	</Location>
+
     
         BrowserMatch    "MSIE [2-6]" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
         # MSIE 7 and newer should be able to use keepalive

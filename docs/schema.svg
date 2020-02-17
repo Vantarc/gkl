@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="315.70987mm"
+   height="116.19316mm"
+   viewBox="0 0 315.70987 116.19316"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14"
+   sodipodi:docname="schema.svg"
+   inkscape:export-filename="/home/lemoer/documents/python/GatrobeKnowledgeLibrary/docs/schema.png"
+   inkscape:export-xdpi="64.360001"
+   inkscape:export-ydpi="64.360001">
+  <defs
+     id="defs2">
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1448"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1451"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart-6"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1448-1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-1"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1451-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart-6-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1448-1-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-1-1"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1451-5-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="446.02544"
+     inkscape:cy="225.86457"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(39.788622,7.6527205)">
+    <rect
+       style="opacity:0.75899999;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.22522354;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect1366"
+       width="130.46957"
+       height="59.910416"
+       x="-39.17601"
+       y="31.17943" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.32291663px;font-family:cmr10;-inkscape-font-specification:cmr10;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-34.745037"
+       y="42.292137"
+       id="text1370"><tspan
+         sodipodi:role="line"
+         id="tspan1368"
+         x="-34.745037"
+         y="42.292137"
+         style="stroke-width:0.26458332px">Client Browser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.32291663px;font-family:cmr10;-inkscape-font-specification:cmr10;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-30.201458"
+       y="54.586536"
+       id="text1374"><tspan
+         sodipodi:role="line"
+         id="tspan1372"
+         x="-30.201458"
+         y="54.586536"
+         style="line-height:10.31875038px;stroke-width:0.26458332px">Vue.js - GUI</tspan><tspan
+         sodipodi:role="line"
+         x="-30.201458"
+         y="64.905289"
+         style="line-height:10.31875038px;stroke-width:0.26458332px"
+         id="tspan1378">PDF.js - PDF Rendering</tspan><tspan
+         sodipodi:role="line"
+         x="-30.201458"
+         y="75.224037"
+         style="line-height:10.31875038px;stroke-width:0.26458332px"
+         id="tspan1380">PDFlib.js - PDF Merging</tspan><tspan
+         sodipodi:role="line"
+         x="-30.201458"
+         y="85.542786"
+         style="line-height:10.31875038px;stroke-width:0.26458332px"
+         id="tspan3817">Own JS WebDAV implementation</tspan><tspan
+         sodipodi:role="line"
+         x="-30.201458"
+         y="91.363625"
+         style="line-height:10.31875038px;stroke-width:0.26458332px"
+         id="tspan1376" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.32291663px;font-family:cmr10;-inkscape-font-specification:cmr10;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="146.19644"
+       y="79.442604"
+       id="text1384"><tspan
+         sodipodi:role="line"
+         id="tspan1382"
+         x="146.19644"
+         y="79.442604"
+         style="line-height:10.31875038px;stroke-width:0.26458332px">Flask Server:</tspan><tspan
+         sodipodi:role="line"
+         x="146.19644"
+         y="89.761353"
+         style="line-height:10.31875038px;stroke-width:0.26458332px"
+         id="tspan1405">/         Serves Client Interface</tspan><tspan
+         sodipodi:role="line"
+         x="146.19644"
+         y="100.08011"
+         style="line-height:10.31875038px;stroke-width:0.26458332px"
+         id="tspan1407">/print  HTTP Interface for printing </tspan></text>
+    <rect
+       style="opacity:0.75899999;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.36991799;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect1366-0"
+       width="134.06665"
+       height="53.083984"
+       x="141.16963"
+       y="54.771496" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.32291663px;font-family:cmr10;-inkscape-font-specification:cmr10;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="146.73096"
+       y="65.277321"
+       id="text1403"><tspan
+         sodipodi:role="line"
+         id="tspan1401"
+         x="146.73096"
+         y="65.277321"
+         style="stroke-width:0.26458332px">gkl.gatrobe.de</tspan></text>
+    <rect
+       style="opacity:0.75899999;vector-effect:none;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.36991799;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect1366-0-9"
+       width="134.06665"
+       height="53.083984"
+       x="141.16963"
+       y="-6.9677615" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.32291663px;font-family:cmr10;-inkscape-font-specification:cmr10;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="146.98271"
+       y="4.629158"
+       id="text1403-6"><tspan
+         sodipodi:role="line"
+         id="tspan1401-3"
+         x="146.98271"
+         y="4.629158"
+         style="stroke-width:0.26458332px">lib.gatrobe.de</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.32291663px;font-family:cmr10;-inkscape-font-specification:cmr10;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="149.13638"
+       y="19.841499"
+       id="text1444"><tspan
+         sodipodi:role="line"
+         id="tspan1442"
+         x="149.13638"
+         y="19.841499"
+         style="stroke-width:0.26458332px">WebDav serves the content PDFs</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart);marker-end:url(#Arrow1Lend)"
+       d="M 98.622455,46.033912 136.04019,13.159762"
+       id="path1446"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart-6);marker-end:url(#Arrow1Lend-1)"
+       d="M 144.72645,86.792514 98.889728,58.996485"
+       id="path1446-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart-6-4);marker-end:url(#Arrow1Lend-1-1)"
+       d="M 145.39462,99.220548 98.889727,68.217285"
+       id="path1446-9-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10316324px;line-height:1.04031181px;font-family:cmr10;-inkscape-font-specification:cmr10;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20806237px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="110.05393"
+       y="93.269882"
+       id="text3447-4-7"
+       transform="scale(1.0361512,0.96511012)"><tspan
+         sodipodi:role="line"
+         id="tspan3445-44-6"
+         x="110.05393"
+         y="93.269882"
+         style="line-height:7.9375px;text-align:center;text-anchor:middle;stroke-width:0.20806237px">https</tspan><tspan
+         sodipodi:role="line"
+         x="110.05393"
+         y="101.20738"
+         style="line-height:7.9375px;text-align:center;text-anchor:middle;stroke-width:0.20806237px"
+         id="tspan3475-3">w/auth</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10316324px;line-height:1.04031181px;font-family:cmr10;-inkscape-font-specification:cmr10;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20806237px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="117.36476"
+       y="56.991844"
+       id="text3447-4-7-1"
+       transform="scale(1.0361512,0.96511012)"><tspan
+         sodipodi:role="line"
+         id="tspan3445-44-6-7"
+         x="117.36476"
+         y="56.991844"
+         style="line-height:7.9375px;text-align:center;text-anchor:middle;stroke-width:0.20806237px">https</tspan><tspan
+         sodipodi:role="line"
+         x="117.36476"
+         y="64.929344"
+         style="line-height:7.9375px;text-align:center;text-anchor:middle;stroke-width:0.20806237px"
+         id="tspan3475-3-5">wo/auth</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10316324px;line-height:1.04031181px;font-family:cmr10;-inkscape-font-specification:cmr10;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20806237px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="104.72547"
+       y="19.329138"
+       id="text3447-4-7-9"
+       transform="scale(1.0361512,0.96511012)"><tspan
+         sodipodi:role="line"
+         id="tspan3445-44-6-6"
+         x="104.72547"
+         y="19.329138"
+         style="line-height:7.9375px;text-align:center;text-anchor:middle;stroke-width:0.20806237px">https/WebDAV</tspan><tspan
+         sodipodi:role="line"
+         x="104.72547"
+         y="27.266638"
+         style="line-height:7.9375px;text-align:center;text-anchor:middle;stroke-width:0.20806237px"
+         id="tspan3475-3-2">w/auth</tspan></text>
+  </g>
+</svg>
