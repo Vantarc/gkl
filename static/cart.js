@@ -278,9 +278,9 @@ Vue.component('cart-summary', {
 			<md-dialog-title>Please ask a Gatrobe member for the printing password!</md-dialog-title>
 
 			<md-dialog-content>
-				<md-field>
+				<md-field :md-toggle-password="false">
 					<label>Password</label>
-					<md-input v-model="printingPassword" type="password"></md-input>
+					<md-input @keydown.enter.native="print" v-model="printingPassword" type="password"></md-input>
 				</md-field>
 			</md-dialog-content>
 
