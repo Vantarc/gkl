@@ -39,7 +39,7 @@ function showResource(dir) {
 function req(resource, method, format = (x) => x.text()) {
 	var path = encodePath(resource);
 
-	return fetch("https://cloud.gatrobe.de/remote.php/dav/files/"+ login + "/" + path, {
+	return fetch("webdavs://cloud.gatrobe.de/remote.php/dav/files/5f6b20a8-9068-11ef-89d5-bc2411f3d92c/Freigaben/GatrobeLib" + "/" + path, {
 		method: method,
 		headers: new Headers({
 			"Authorization": `Basic ${btoa(`${login}:${password}`)}`
