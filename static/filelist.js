@@ -51,7 +51,7 @@ Vue.component('file-list', {
 
 
 					console.assert(href.length == 1);
-					const name = decodeURIComponent(href[0].childNodes[0].nodeValue);
+					const name = decodeURIComponent(href[0].childNodes[0].nodeValue.replace("/remote.php/dav/files/5f6b20a8-9068-11ef-89d5-bc2411f3d92c/GatrobeLib", ""));
 
 					let type = null;
 
