@@ -1,0 +1,10 @@
+services:
+  gkl:
+    build: .
+    ports:
+      - 8001:8000
+    volumes:
+      - /var/run/dbus:/var/run/dbus
+      - /etc/cups:/etc/cups/
+      - ./configuration.py:/srv/gkl/configuration.py
+      - ./credentials.js:/srv/gkl/static/credentials.js
