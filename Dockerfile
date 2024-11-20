@@ -21,5 +21,5 @@ WORKDIR /srv/gkl/static
 
 RUN npm install 
 
-CMD tail -f /dev/null
-# CMD python /srv/gkl/wsgi.py
+# CMD tail -f /dev/null
+CMD python /srv/gkl/wsgi.py
